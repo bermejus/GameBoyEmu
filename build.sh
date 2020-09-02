@@ -14,9 +14,18 @@ cpp_files=(
 
 include_dirs=(
     "-Isrc"
+    "-I/usr/local/Cellar/sdl2/2.0.12_1/include"
 )
 
-clang++ -O3 -std=c++2a -fcoroutines-ts ${include_dirs[@]} ${cpp_files[@]}
+lib_dirs=(
+    "-L/usr/local/Cellar/sdl2/2.0.12_1/lib"
+)
+
+libs=(
+    "-lSDL2"
+)
+
+clang++ -O3 -std=c++2a -fcoroutines-ts ${include_dirs[@]} ${lib_dirs[@]} ${libs[@]} ${cpp_files[@]}
 echo "Done."
 echo
 
