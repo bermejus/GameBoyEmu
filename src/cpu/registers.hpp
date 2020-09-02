@@ -1,6 +1,7 @@
 #pragma once
 
 #include <types.hpp>
+#include <iostream>
 
 struct Registers
 {
@@ -48,4 +49,9 @@ struct Registers
 
     ushort SP;
     ushort PC;
+
+    void print() const
+	{
+		std::printf("AF: $%04X, BC: $%04X, DE: $%04X, HL: $%04X, SP: $%04X, PC: $%04X [Z:%d, N:%d, H:%d, C:%d]\n", AF, BC, DE, HL, SP, PC, ZF, NF, HF, CF);
+	}
 };

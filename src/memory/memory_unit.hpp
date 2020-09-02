@@ -2,7 +2,7 @@
 
 #include <types.hpp>
 
-class IO
+class MemoryUnit
 {
 public:
     virtual bool accepts(const ushort addr) const = 0;

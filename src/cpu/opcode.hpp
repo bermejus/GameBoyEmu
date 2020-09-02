@@ -1,14 +1,21 @@
 #pragma once
 
-#include <vector>
+#include <types.hpp>
+#include "../utils/task.hpp"
 
 struct CPU;
-
-typedef void (CPU::*Func)();
 
 struct Opcode
 {
     const char* disassembly;
-    const int fetch_length;
-    std::vector<Func> op;
+    const uint fetch_length;
+    const uint cycles;
+    Task (CPU::*op)();
+};
+
+struct CbOpcode
+{
+	const char* disassembly;
+	const uint cycles;
+	Task (CPU::*op)();
 };

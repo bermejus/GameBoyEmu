@@ -2,7 +2,7 @@
 
 #include <types.hpp>
 #include <string>
-#include <memory/io.hpp>
+#include <memory/memory_unit.hpp>
 #include <vector>
 #include <array>
 
@@ -38,10 +38,14 @@ enum CartridgeType
     HuC1_RAM_BATT               = 0xFF
 };
 
-class Cartridge : IO
+class Cartridge : MemoryUnit
 {
 private:
+    std::string title;
+    CartridgeType type;
+    
     std::vector<std::array<ubyte, 0x4000>> rom;
+    std::vector<std::array<ubyte, 0x2000>> ram;
 
 public:
     Cartridge(const std::string& path);
@@ -49,4 +53,13 @@ public:
     bool accepts(const ushort addr) const override;
     ubyte read(const ushort addr) const override;
     void write(const ushort addr, const ubyte value) override;
+
+private:
+    void build_ram(ubyte ram_size);
+
+    ubyte readRomOnly(const ushort addr) const;
+    ubyte readMBC1(const ushort addr) const;
+
+    void writeRomOnly(const ushort addr, const ubyte value);
+    void writeMBC1(const ushort addr, const ubyte value);
 };
